@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://kp8lauxemed4"]
+
+[ext_resource type="Script" uid="uid://bupexe1gvpv7e" path="res://CompositorEffects/BlurEffect.gd" id="2_fxs24"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pmjbp"]
+
+[sub_resource type="Sky" id="Sky_j8wvp"]
+sky_material = SubResource("ProceduralSkyMaterial_pmjbp")
+
+[sub_resource type="Environment" id="Environment_53t2d"]
+background_mode = 2
+sky = SubResource("Sky_j8wvp")
+ambient_light_source = 3
+tonemap_white = 4.11
+ssao_enabled = true
+ssao_light_affect = 1.0
+ssao_ao_channel_affect = 1.0
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_pmjbp"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = false
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_fxs24")
+blur_type = 0
+blur_samples = 15
+blur_width = 80
+dither = 0.0
+mip_level = 1
+metadata/_custom_type_script = ExtResource("2_fxs24")
+
+[sub_resource type="Compositor" id="Compositor_tvsrp"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_pmjbp")])
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sk41h"]
+albedo_color = Color(5.77569e-07, 0.558689, 0.887721, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxs24"]
+albedo_color = Color(0.283788, 0.629864, 3.85046e-07, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pmjbp"]
+albedo_color = Color(0.999998, 0.462573, 0.0884086, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8wvp"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_53t2d")
+compositor = SubResource("Compositor_tvsrp")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.666326, 0.145035, -0.731419, -0.0181104, 0.98376, 0.178573, 0.74544, -0.105742, 0.658132, -2.98239, 0.936296, 1.17454)
+near = 0.051
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.554859, 0)
+material = SubResource("StandardMaterial3D_sk41h")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.751221, 1.04158, -0.736419)
+material = SubResource("StandardMaterial3D_fxs24")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(4.04546, 0, 0, 0, 0.0967819, 0, 0, 0, 4.99332, -1.58694, 0.00906229, 0.00811529)
+size = Vector3(1.787, 1, 1)
+material = SubResource("StandardMaterial3D_pmjbp")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.16594, 0.580767, 0)
+radial_segments = 19
+rings = 16
+material = SubResource("StandardMaterial3D_j8wvp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.673529, 0.739161, 0, -0.739161, 0.673529, 0, 3.99736, 0)
+shadow_enabled = true
