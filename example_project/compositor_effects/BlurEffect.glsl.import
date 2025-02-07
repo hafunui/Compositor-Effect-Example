@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://dwpfq4wui2fek"
+path="res://.godot/imported/BlurEffect.glsl-66445d778075e51fd5f8b93c87e97e09.res"
+
+[deps]
+
+source_file="res://example_project/compositor_effects/BlurEffect.glsl"
+dest_files=["res://.godot/imported/BlurEffect.glsl-66445d778075e51fd5f8b93c87e97e09.res"]
+
+[params]
+

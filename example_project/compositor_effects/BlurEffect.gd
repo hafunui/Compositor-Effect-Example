@@ -32,7 +32,7 @@ func initialize_compute_shader() -> void:
 	rd = RenderingServer.get_rendering_device()
 	if rd:
 		#Make sure this is correctly pointing to the GLSL file
-		var glsl_file:RDShaderFile = load("res://CompositorEffects/BlurEffect.glsl")
+		var glsl_file:RDShaderFile = load("res://example_project/compositor_effects/BlurEffect.glsl")
 		shader = rd.shader_create_from_spirv(glsl_file.get_spirv())
 		pipeline = rd.compute_pipeline_create(shader)
 		sampler_state = RDSamplerState.new()
