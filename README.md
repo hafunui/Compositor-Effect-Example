@@ -1,9 +1,16 @@
 # Compositor Effect Example - Multipass Blur
 This is an example of a two-pass blur compositor effect for use in Godot.
 
+Base
 ![Base scene with no blur](images/base_scene.jpg)
+
+Gaussian blur
 ![Base scene with gaussian blur](images/gaussian_blur.jpg)
+
+Box blur with low samples
 ![Base scene with box blur at low samples](images/box_low_sample.jpg)
+
+Box blur with low samples and dither
 ![Base scene with box blur and dithering](images/box_low_sample_dithered.jpg)
 
 # Features
