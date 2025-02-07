@@ -57,7 +57,7 @@ transform = Transform3D(0.666326, 0.145035, -0.731419, -0.0181104, 0.98376, 0.17
 near = 0.051
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.554859, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555, 0)
 material = SubResource("StandardMaterial3D_sk41h")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]

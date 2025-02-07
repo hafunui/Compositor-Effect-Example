@@ -82,9 +82,6 @@ func do_pass(render_data: RenderData, pass_num:int) -> void:
 	if backbuffers.size() < view_count*2 or size_cache != size or mip_cache != mip_level:
 		init_backbuffer(view_count*2, size)
 	
-	#inverse projection matrix from camera. Used to transform depth buffer into something linear
-	var inv_proj_mat:Projection = scene_data.get_cam_projection().inverse()
-	
 	#Push constants - make sure everything is in the same order as shader
 	var packed_bytes:PackedByteArray = PackedByteArray()
 	var packed_floats:PackedFloat32Array = PackedFloat32Array()
@@ -99,16 +96,16 @@ func do_pass(render_data: RenderData, pass_num:int) -> void:
 		packed_floats.append(size.x) #screen_size.x
 		packed_floats.append(size.y) #screen_size.y
 	packed_floats.append(dither) #dither amount
-	packed_bytes.append_array(packed_floats.to_byte_array())
 	
 	#ints
 	packed_ints.append(1 if blur_type == BlurType.GAUSSIAN else 0)
 	packed_ints.append(min(blur_samples, blur_width))
 	packed_ints.append(blur_width)
 	packed_ints.append(pass_num)
-	packed_bytes.append_array(packed_ints.to_byte_array())
 	
 	#padding. If the console complains about not supplying enough bytes, input requested amount here
+	packed_bytes.append_array(packed_floats.to_byte_array())
+	packed_bytes.append_array(packed_ints.to_byte_array())
 	packed_bytes.resize(32)
 	
 	#do for each view. Normally only 1 view, but VR may use 2
