@@ -1,9 +1,10 @@
 #[compute]
 #version 450
 
-//process 16 by 16 chunk per invocation
+//process 16 by 16 chunk per invocation. Chosen arbitrarily. Im not sure what the optimal value here is 
 layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
 
+//documentation reccomends using 'restrict' whenever possible. Not able to use it with the sampler
 layout(rgba16f, binding=0, set=0) restrict uniform image2D image1; 	//write
 layout(binding=0, set=1) uniform sampler2D sampler1; 				//read
 
@@ -59,7 +60,7 @@ void main() {
 	float kern_half = float(p.kern_width) * 0.5;
 	
 	// Gaussian weights
-	float weights[161];
+	float weights[161]; //Not allowed to have variable length arrays in GLSL, so hard code theoretical max kernel size.
 	float sigma = float(p.kern_width) / (6.0 * float(p.kern_width)/float(p.kern_samples)); // Adjust sigma based on kernel width
 	if(p.is_gaussian == 1) {
 		compute_gaussian_weights(p.kern_samples, sigma, weights);
@@ -73,6 +74,7 @@ void main() {
 		for (int i = 0; i <= p.kern_samples; i++) {
 			coord.x = pixel.x + (i * kern_spacing) - kern_half + get_dither(kern_spacing);
 			coord.y = pixel.y;
+			//if gaussian blur, add a weighted sample, if box we can average all at once at the end of loop
 			if(p.is_gaussian == 1) col += texture(sampler1, clamp(coord / p.screen_size, 0.0, 1.0)) * weights[i];
 			else col += texture(sampler1, clamp(coord / p.screen_size, 0.0, 1.0));
 		}

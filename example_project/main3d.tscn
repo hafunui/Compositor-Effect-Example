@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://kp8lauxemed4"]
 
-[ext_resource type="Script" uid="uid://bupexe1gvpv7e" path="res://example_project/compositor_effects/BlurEffect.gd" id="2_fxs24"]
+[ext_resource type="Script" uid="uid://bupexe1gvpv7e" path="res://compositor_effects/BlurEffect.gd" id="1_sk41h"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pmjbp"]
 
@@ -16,23 +16,23 @@ ssao_enabled = true
 ssao_light_affect = 1.0
 ssao_ao_channel_affect = 1.0
 
-[sub_resource type="CompositorEffect" id="CompositorEffect_cnvs7"]
+[sub_resource type="CompositorEffect" id="CompositorEffect_sk41h"]
 resource_local_to_scene = false
 resource_name = ""
 enabled = true
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
-script = ExtResource("2_fxs24")
+script = ExtResource("1_sk41h")
 blur_type = 0
 blur_samples = 15
 blur_width = 80
 dither = 0.0
 mip_level = 1
-metadata/_custom_type_script = ExtResource("2_fxs24")
+metadata/_custom_type_script = ExtResource("1_sk41h")
 
 [sub_resource type="Compositor" id="Compositor_tvsrp"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_cnvs7")])
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_sk41h")])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sk41h"]
 albedo_color = Color(5.77569e-07, 0.558689, 0.887721, 1)

@@ -1,8 +1,10 @@
 # Compositor Effect Example - Multipass Blur
 This is an example of a two-pass blur compositor effect for use in Godot.
 
-![Base scene with no blur](https://raw.githubusercontent.com/hafunui/Compositor-Effect-Example/refs/heads/main/images/base_scene.jpg)
-![Base scene with blur](https://raw.githubusercontent.com/hafunui/Compositor-Effect-Example/refs/heads/main/images/gaussian_blur.jpg)
+![Base scene with no blur](images/base_scene.jpg)
+![Base scene with gaussian blur](images/gaussian_blur.jpg)
+![Base scene with box blur at low samples](images/box_low_sample.jpg)
+![Base scene with box blur and dithering](images/box_low_sample_dithered.jpg)
 
 # Features
 - Two pass blur filter. For a kernel size of N, a single pass blur would have N² calculations per pixel, whereas a two pass blur would only have N*2. For example, with a kernel width of 100, that's the difference between 10,000 operations per pixel versus 200 operations per pixel.
